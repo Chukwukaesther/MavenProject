@@ -1,7 +1,9 @@
 package com.semicolon.africa.controllers;
 
+import com.semicolon.africa.dto.request.LoginRequest;
 import com.semicolon.africa.dto.request.RegisterUserRequest;
 import com.semicolon.africa.dto.response.ApiResponse;
+import com.semicolon.africa.dto.response.LoginResponse;
 import com.semicolon.africa.dto.response.RegisterUserResponse;
 import com.semicolon.africa.exceptions.UserAlreadyExistException;
 import com.semicolon.africa.services.UserService;
@@ -24,6 +26,16 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody RegisterUserRequest registerUserRequest) {
         try {
             RegisterUserResponse result = userService.registerUser(registerUserRequest);
+            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
+        } catch (UserAlreadyExistException exception) {
+            return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);
+
+        }
+    }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            LoginResponse result = userService.login(loginRequest);
             return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
         } catch (UserAlreadyExistException exception) {
             return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);

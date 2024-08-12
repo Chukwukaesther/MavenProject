@@ -24,20 +24,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest) {
         User user = new User();
-        validateUser(registerUserRequest);
+        String username = registerUserRequest.getUsername();
+        validateUser(username);
         user.setUserName(registerUserRequest.getUsername());
         user.setAddress(registerUserRequest.getUserAddress());
+        user.setPassword(registerUserRequest.getUserRiderPassword());
         user.setPhoneNumber(registerUserRequest.getUserPhoneNumber());
         user.setEmail(registerUserRequest.getUserEmail());
-        userRepository.save(user);
+        user = userRepository.save(user);
         RegisterUserResponse registerUserResponse = new RegisterUserResponse();
         registerUserResponse.setMessage("Success");
+        registerUserResponse.setUserName(user.getUserName());
+        registerUserResponse.setId(user.getId());
         return registerUserResponse;
     }
 
-    private void validateUser(RegisterUserRequest registerUserRequest) {
-        for(User User : userRepository.findAll()) {
-            if(User.getUserName().equals(registerUserRequest.getUsername())){
+    private void validateUser(String username) {
+        for(User user1 : userRepository.findAll()) {
+            if(user1.getUserName().equals(username)){
                 throw new UserAlreadyExistException("User already exist");
             }
         }
@@ -48,12 +52,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        String username = loginRequest.getUserName();
-        String password = loginRequest.getPassword();
-
-        boolean isExist = ifExist(username,password);
-        if(isExist){
-            throw new RuntimeException("Username or password doesn't match");
+       User user = userRepository.findByUserName(loginRequest.getUserName());
+        if(!user.getPassword().equals(loginRequest.getPassword()) && !user.getUserName().equals(loginRequest.getUserName())) {
+            throw new UserAlreadyExistException("user not found");
         }
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setMessage("Successfully logged in");

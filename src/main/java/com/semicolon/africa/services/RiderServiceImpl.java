@@ -93,23 +93,7 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public PickupResponse pickup(PickupRequest pickupRequest){
-//        RiderRepository repo = riderRepository;
-//        repo.findRiderByRiderUserNameIgnoreCase(pickupRequest.getPickupCustomerName());
-//
-//        String customerName = pickupRequest.getPickupCustomerName();
-//        String pickupAddress = pickupRequest.getPickupAddress();
-//
-//
-//
-//        RiderRepository riderRepository1 = riderRepository;
-//        riderRepository1.findRiderByRiderEmailIgnoreCase("Email");
-//        UserRepository userRepository1 = userRepository;
-//        userRepository1.findUserByEmail("Email");
-//        CallRiderResponse callRiderResponse = new CallRiderResponse();
-//        callRiderResponse.setMessage("Call Successful");
-//        PickupResponse response = new PickupResponse();
-//        response.setMessage("Pickup Successful");
-//
+        RiderRepository repo = riderRepository;
 
         return null;
     }

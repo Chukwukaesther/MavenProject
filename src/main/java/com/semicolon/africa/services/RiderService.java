@@ -8,8 +8,7 @@ public interface RiderService {
     LoginResponse login(LoginRequest loginRequest);
     LogoutResponse logout(logoutRequest request);
     PickupResponse pickup(PickupRequest pickupRequest);
-    CallRiderResponse call(CallRiderRequest callRiderRequest);
-    DeliverResponse deliver(DiliveryRequest DeliveryRequest);
+    DeliverResponse deliver(DeliveryInformationRequest DeliveryInformationRequest);
 
 
 

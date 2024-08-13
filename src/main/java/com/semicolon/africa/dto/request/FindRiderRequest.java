@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CallRiderRequest {
+public class FindRiderRequest {
+    private int riderId;
     private String riderName;
-    private String phoneNumber;
-
+    private String riderCurrentLocation;
 }

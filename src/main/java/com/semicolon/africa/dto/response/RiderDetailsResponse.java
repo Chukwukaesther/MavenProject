@@ -5,7 +5,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CallRiderResponse {
+public class RiderDetailsResponse {
+    private int id;
     private String message;
+
 
 }

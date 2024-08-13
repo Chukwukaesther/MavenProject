@@ -6,9 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class UserRequest {
-    private String username;
-    private String password;
+public class CustomerRequest {
+    private String CustomerId;
+    private String CustomerName;
+    private String PickupAddress;
+    private String deliveryAddress;
     private String email;
     private String PhoneNumber;
     private String address;

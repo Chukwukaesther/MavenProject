@@ -4,13 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Getter
 @Setter
-public class PickupResponse {
-    private int pickupId;
+public class TrackingInformationResponse {
+    private String trackingId;
+    private String trackingStatus;
     private String message;
-
-
 }

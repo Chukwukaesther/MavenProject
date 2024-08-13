@@ -1,7 +1,5 @@
 package com.semicolon.africa.data.model;
 
-import com.semicolon.africa.category.UserCategory;
-import com.semicolon.africa.data.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -13,16 +11,15 @@ import java.util.List;
 @Document
 @Setter
 @Getter
-public class User {
+public class Customer {
 
     @Id
     private String id;
-    private String name;
-    private String userName;
-    private String email;
+    private String username;
+    private String CustomerEmail;
     private String password;
     private String phoneNumber;
     private String address;
     @DBRef
-    private List<Item> itemList;
+    private List<Product> productList;
 }

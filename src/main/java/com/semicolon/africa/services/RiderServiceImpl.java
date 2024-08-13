@@ -1,7 +1,7 @@
 package com.semicolon.africa.services;
 import com.semicolon.africa.data.model.Rider;
 import com.semicolon.africa.data.repository.RiderRepository;
-import com.semicolon.africa.data.repository.UserRepository;
+import com.semicolon.africa.data.repository.CustomerRepository;
 import com.semicolon.africa.dto.request.*;
 import com.semicolon.africa.dto.response.*;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RiderServiceImpl implements RiderService {
     private final RiderRepository riderRepository;
-    private final UserRepository userRepository;
+    private final CustomerRepository userRepository;
 
     @Override
     public RegisterRiderResponse registerRider(RegisterRiderRequest request) {
@@ -68,7 +68,7 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public LogoutResponse logout(logoutRequest request){
-        riderRepository.findRiderByRiderUserNameIgnoreCase(request.getUserName());
+       // riderRepository.findRiderByRiderUserNameIgnoreCase(request.getUserName());
 
         String username = request.getUserName();
         boolean isAmong = ifAmong(username);
@@ -93,20 +93,28 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public PickupResponse pickup(PickupRequest pickupRequest){
-        RiderRepository repo = riderRepository;
+        RiderRepository rider = this.riderRepository;
+        rider.findRiderByRiderUserName(pickupRequest.getPickupCustomerName());
+        PickupResponse response = new PickupResponse();
+        response.setMessage("Pickup Successful");
 
-        return null;
+        return response;
     }
 
     @Override
-    public CallRiderResponse call(CallRiderRequest callRiderRequest) {
-        RiderRepository riderRepository1 = riderRepository;
+    public DeliverResponse deliver(DeliveryInformationRequest deliveryInformationRequest) {
+        DeliveryInformationRequest deliveryInformationRequest1 = new DeliveryInformationRequest();
+        deliveryInformationRequest1.setDeliveryId(deliveryInformationRequest.getDeliveryId());
+        deliveryInformationRequest1.setDeliveryLocation(deliveryInformationRequest.getDeliveryLocation());
+        deliveryInformationRequest1.setDeliveryStatus(deliveryInformationRequest.getDeliveryStatus());
+        deliveryInformationRequest1.setProductName(deliveryInformationRequest.getProductName());
+        deliveryInformationRequest1.setReceiverPhoneNumber(deliveryInformationRequest.getReceiverPhoneNumber());
+        deliveryInformationRequest1.setReceiverName(deliveryInformationRequest.getReceiverName());
 
-        return null;
-    }
 
-    @Override
-    public DeliverResponse deliver(DiliveryRequest DeliveryRequest) {
+        DeliverResponse response = new DeliverResponse();
+
+
         return null;
     }
 }

@@ -2,14 +2,16 @@ package com.semicolon.africa.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 @Setter
 @Getter
-public class RiderRequest {
+public class RiderDetailsRequest {
+    private int riderId;
     private String riderUserName;
     private String riderPassword;
     private String riderEmail;
-    private String riderPhone;
+    private String riderPhoneNumber;
     private String riderAddress;
+    private String CurrentLocation;
+    private String riderAccountDetails;
 }

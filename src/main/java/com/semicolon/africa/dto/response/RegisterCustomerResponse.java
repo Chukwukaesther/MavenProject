@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class BookRideResponse {
-    private int bookRideId;
-    private boolean isAvailable;
-    private String location;
+public class RegisterCustomerResponse {
+    private String UserName;
+    private String Id;
     private String message;
+
 }

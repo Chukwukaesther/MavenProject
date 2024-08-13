@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class AddItemResponse {
-    private int id;
-    private String itemName;
-    private double itemPrice;
+public class ProductResponse {
     private String message;
+
+
+
 }

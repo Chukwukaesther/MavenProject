@@ -23,7 +23,7 @@ class RiderServiceImplTest {
 
     @BeforeEach
     void setUp() {
-//
+
         riderRepository.deleteAll();
 
     }

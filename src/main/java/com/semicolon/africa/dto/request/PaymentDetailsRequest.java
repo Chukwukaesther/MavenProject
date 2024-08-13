@@ -7,9 +7,10 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-public class PaymentRequest {
-    private String Id;
-    private double amount;
+public class PaymentDetailsRequest {
+
+    private String PaymentName;
+    private Double PaymentAmount;
     private String PaymentType;
     private String paymentStatus;
     private LocalDateTime paymentDate;

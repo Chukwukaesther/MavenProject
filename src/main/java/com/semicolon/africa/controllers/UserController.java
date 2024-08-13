@@ -1,12 +1,12 @@
 package com.semicolon.africa.controllers;
 
 import com.semicolon.africa.dto.request.LoginRequest;
-import com.semicolon.africa.dto.request.RegisterUserRequest;
+import com.semicolon.africa.dto.request.RegisterCustomerRequest;
 import com.semicolon.africa.dto.response.ApiResponse;
 import com.semicolon.africa.dto.response.LoginResponse;
-import com.semicolon.africa.dto.response.RegisterUserResponse;
+import com.semicolon.africa.dto.response.RegisterCustomerResponse;
 import com.semicolon.africa.exceptions.UserAlreadyExistException;
-import com.semicolon.africa.services.UserService;
+import com.semicolon.africa.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +21,11 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RequestMapping("api/User")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private CustomerService customerService;
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterUserRequest registerUserRequest) {
+    public ResponseEntity<?> register(@RequestBody RegisterCustomerRequest registerCustomerRequest) {
         try {
-            RegisterUserResponse result = userService.registerUser(registerUserRequest);
+            RegisterCustomerResponse result = customerService.registerUser(registerCustomerRequest);
             return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
         } catch (UserAlreadyExistException exception) {
             return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);
@@ -35,7 +35,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            LoginResponse result = userService.login(loginRequest);
+            LoginResponse result = customerService.login(loginRequest);
             return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
         } catch (UserAlreadyExistException exception) {
             return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);

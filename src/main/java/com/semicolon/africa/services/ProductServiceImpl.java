@@ -4,13 +4,19 @@ import com.semicolon.africa.data.model.Product;
 import com.semicolon.africa.data.repository.ProductRepository;
 import com.semicolon.africa.dto.request.ProductRequest;
 import com.semicolon.africa.dto.response.ProductResponse;
+import com.semicolon.africa.exceptions.ProductException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
 
 @Service
+
 public class ProductServiceImpl implements ProductService {
+
     @Autowired
-    private ProductRepository productRepository;
+    private  ProductRepository productRepository;
+
     @Override
     public ProductResponse addProduct(ProductRequest productRequest) {
 
@@ -28,7 +34,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(String id) {
-
-
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductException("Product not found"));
+        productRepository.delete(product);
     }
 }

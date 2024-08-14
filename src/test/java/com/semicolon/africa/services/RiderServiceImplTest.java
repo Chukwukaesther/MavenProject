@@ -49,16 +49,13 @@ class RiderServiceImplTest {
 
     @Test
     void TestThatRidersCanLogin() {
-
-
         LoginRequest loginRider = new LoginRequest();
         loginRider.setUserName("Esther");
         loginRider.setPassword("1234");
         riderServiceImpl.login(loginRider);
         LoginResponse response = new LoginResponse();
         response.setMessage("Login successful");
-        assertEquals(true, riderRepository.findRiderByRiderUserNameIgnoreCase("esther").isLoggedIn());
-
+        assertEquals(true, riderRepository.findByRiderUserName("esther"));
 
 
 

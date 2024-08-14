@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 public class FindRiderRequest {
     private int riderId;
-    private String riderName;
+    private String riderUsername;
     private String riderCurrentLocation;
 }

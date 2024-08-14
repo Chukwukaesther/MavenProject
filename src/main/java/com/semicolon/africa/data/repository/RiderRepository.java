@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RiderRepository extends MongoRepository<Rider, String> {
-         Rider findRiderByRiderUserName(String username);
+
+
+    Rider findByRiderUserName(String userName);
+    Rider findRiderByCurrentLocation(String riderCurrentLocation);
 
 }
 

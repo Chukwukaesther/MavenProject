@@ -7,6 +7,7 @@ import com.semicolon.africa.dto.response.LoginResponse;
 import com.semicolon.africa.dto.response.RegisterCustomerResponse;
 import com.semicolon.africa.exceptions.UserAlreadyExistException;
 import com.semicolon.africa.services.CustomerService;
+import com.semicolon.africa.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,11 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("api/User")
-public class UserController {
+public class CustomerController {
+
     @Autowired
-    private CustomerService customerService;
+    private CustomerServiceImpl customerService;
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterCustomerRequest registerCustomerRequest) {
         try {

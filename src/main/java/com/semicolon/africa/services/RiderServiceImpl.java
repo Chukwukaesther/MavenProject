@@ -7,15 +7,17 @@ import com.semicolon.africa.dto.response.*;
 
 import com.semicolon.africa.exceptions.RiderAlreadyExistException;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+
 public class RiderServiceImpl implements RiderService {
-    private final RiderRepository riderRepository;
-    private final CustomerRepository userRepository;
+    @Autowired
+    private  RiderRepository riderRepository;
+
 
     @Override
     public RegisterRiderResponse registerRider(RegisterRiderRequest request) {
@@ -43,6 +45,7 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
+        riderRepository.findByRiderUserName(loginRequest.getUserName());
         String username = loginRequest.getUserName();
         String password = loginRequest.getPassword();
 
@@ -68,8 +71,7 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public LogoutResponse logout(logoutRequest request){
-       // riderRepository.findRiderByRiderUserNameIgnoreCase(request.getUserName());
-
+        riderRepository.findByRiderUserName(request.getUserName());
         String username = request.getUserName();
         boolean isAmong = ifAmong(username);
         if (isAmong) {
@@ -94,7 +96,7 @@ public class RiderServiceImpl implements RiderService {
     @Override
     public PickupResponse pickup(PickupRequest pickupRequest){
         RiderRepository rider = this.riderRepository;
-        rider.findRiderByRiderUserName(pickupRequest.getPickupCustomerName());
+        rider.findByRiderUserName(pickupRequest.getPickupCustomerName());
         PickupResponse response = new PickupResponse();
         response.setMessage("Pickup Successful");
 
@@ -110,8 +112,6 @@ public class RiderServiceImpl implements RiderService {
         deliveryInformationRequest1.setProductName(deliveryInformationRequest.getProductName());
         deliveryInformationRequest1.setReceiverPhoneNumber(deliveryInformationRequest.getReceiverPhoneNumber());
         deliveryInformationRequest1.setReceiverName(deliveryInformationRequest.getReceiverName());
-
-
         DeliverResponse response = new DeliverResponse();
 
 

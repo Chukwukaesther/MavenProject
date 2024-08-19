@@ -10,6 +10,7 @@ public interface RiderRepository extends MongoRepository<Rider, String> {
 
 
     Rider findByRiderUserName(String userName);
+
     Rider findRiderByCurrentLocation(String riderCurrentLocation);
 
 }

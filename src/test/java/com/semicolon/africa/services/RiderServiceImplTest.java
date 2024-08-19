@@ -1,11 +1,9 @@
 package com.semicolon.africa.services;
-
 import com.semicolon.africa.data.repository.RiderRepository;
 import com.semicolon.africa.dto.request.LoginRequest;
 import com.semicolon.africa.dto.request.RegisterRiderRequest;
 import com.semicolon.africa.dto.response.LoginResponse;
 import com.semicolon.africa.exceptions.RiderAlreadyExistException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,13 +19,13 @@ class RiderServiceImplTest {
     @Autowired
     private RiderServiceImpl riderServiceImpl;
 
-    @BeforeEach
-    void setUp() {
-
-        riderRepository.deleteAll();
-
-    }
-
+//    @BeforeEach
+//    void setUp() {
+//
+////        riderRepository.deleteAll();
+//
+//    }
+//
     @Test
     void TestThatRidersCanRegister() {
         RegisterRiderRequest registerRider = new RegisterRiderRequest();
@@ -72,6 +70,9 @@ class RiderServiceImplTest {
         assertThrows(RiderAlreadyExistException.class, () -> riderServiceImpl.registerRider(registerRider));
     }
 
+    @Test
+    public void testThatRiderCanDeliver(){
+    }
 
 
 

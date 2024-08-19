@@ -1,5 +1,6 @@
 package com.semicolon.africa.data.model;
 
+import com.semicolon.africa.category.RiderStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -19,7 +20,7 @@ public class Rider {
     private  String riderPassword;
     private String serviceCharge;
     private String vehicleDetails;
-    private String availabilityStatus;
+    private RiderStatus availabilityStatus;
     private String riderEmail;
     private String riderPhoneNumber;
     private String riderAddress;
@@ -28,7 +29,7 @@ public class Rider {
     @DBRef
     private List<Product> productList;
     private List<Customer> customerList;
-    private List<Pickup> pickupList;
-    private List <Delivery> deliveryList;
+    //private List<Pickup> pickupList;
+   // private List <Delivery> deliveryList;
 
 }

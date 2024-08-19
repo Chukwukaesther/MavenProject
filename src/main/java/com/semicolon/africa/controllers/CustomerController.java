@@ -9,11 +9,9 @@ import com.semicolon.africa.exceptions.UserAlreadyExistException;
 import com.semicolon.africa.services.CustomerService;
 import com.semicolon.africa.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -33,17 +31,24 @@ public class CustomerController {
         } catch (UserAlreadyExistException exception) {
             return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);
 
+        }catch (Exception exception) {
+            return new ResponseEntity<>(new ApiResponse(false, "An unexpected error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
+
         }
     }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             LoginResponse result = customerService.login(loginRequest);
-            return new ResponseEntity<>(new ApiResponse(true, result), CREATED);
+            return new ResponseEntity<>(new ApiResponse(true, result), HttpStatus.OK);
         } catch (UserAlreadyExistException exception) {
             return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);
 
-        }
-    }
+        } catch (Exception exception) {
+            return new ResponseEntity<>(new ApiResponse(false, "An unexpected error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
 
+        }
+
+    }
 }

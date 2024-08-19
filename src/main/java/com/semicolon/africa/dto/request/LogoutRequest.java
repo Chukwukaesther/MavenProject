@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class logoutRequest {
+public class LogoutRequest {
     private String UserName;
     private String EmailAddress;
 

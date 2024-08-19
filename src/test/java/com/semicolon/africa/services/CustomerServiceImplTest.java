@@ -1,7 +1,9 @@
 package com.semicolon.africa.services;
 
+import com.semicolon.africa.data.model.Rider;
 import com.semicolon.africa.data.repository.RiderRepository;
 import com.semicolon.africa.data.repository.CustomerRepository;
+import com.semicolon.africa.dto.request.CustomerRequest;
 import com.semicolon.africa.dto.request.LoginRequest;
 import com.semicolon.africa.dto.request.RegisterCustomerRequest;
 import com.semicolon.africa.exceptions.UserAlreadyExistException;
@@ -21,58 +23,77 @@ class CustomerServiceImplTest {
     @Autowired
     private RiderRepository riderRepository;
     @Autowired
-    private CustomerServiceImpl userServiceImpl;
+    private CustomerServiceImpl customerServiceImpl;
     @Autowired
-    private CustomerRepository userRepository;
+    private CustomerRepository customerRepository;
+    @Autowired
+    private RiderServiceImpl riderServiceImpl;
 
     @BeforeEach
     void setUp() {
         riderRepository.deleteAll();
-        userRepository.deleteAll();
+        customerRepository.deleteAll();
     }
 
 
     @Test
-    public void testThatUserCanRegister() {
+    public void testThatCustomerCanRegister() {
         RegisterCustomerRequest registerUser = new RegisterCustomerRequest();
         registerUser.setUsername("coutinho");
-        registerUser.setUserRiderPassword("234");
-        registerUser.setUserAddress("Sabo");
-        registerUser.setUserEmail("coutinho@gmail.com");
+        registerUser.setPassword("234");
+        registerUser.setCustomerAddress("Sabo");
+        registerUser.setCustomerEmail("coutinho@gmail.com");
         customerService.registerUser(registerUser);
-        assertEquals(1, userRepository.count());
+        assertEquals(1, customerRepository.count());
 
 
 
     }
 
     @Test
-    public void testThatUserCannotRegisterTwice() {
+    public void testThatCustomerCannotRegisterTwice() {
         RegisterCustomerRequest registerUser = new RegisterCustomerRequest();
         registerUser.setUsername("Ether");
-        registerUser.setUserRiderPassword("235");
-        registerUser.setUserAddress("festac");
-        registerUser.setUserEmail("Esther@gmail.com");
+        registerUser.setPassword("235");
+        registerUser.setCustomerAddress("festac");
+        registerUser.setCustomerEmail("Esther@gmail.com");
         customerService.registerUser(registerUser);
         assertThrows(UserAlreadyExistException.class, () -> customerService.registerUser(registerUser));
     }
 
     @Test
-    public void testThatUserCanLogin(){
+    public void testThatCustomerCanLogin(){
         RegisterCustomerRequest registerUser = new RegisterCustomerRequest();
         registerUser.setUsername("coutinho1");
-        registerUser.setUserRiderPassword("2344");
-        registerUser.setUserAddress("Sabo");
-        registerUser.setUserEmail("coutinho1@gmail.com");
+        registerUser.setPassword("2344");
+        registerUser.setCustomerAddress("Sabo");
+        registerUser.setCustomerEmail("coutinho1@gmail.com");
         customerService.registerUser(registerUser);
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUserName("coutinho1");
         loginRequest.setPassword("2344");
-        userServiceImpl.login(loginRequest);
-        assertEquals(1, userRepository.count());
+        customerServiceImpl.login(loginRequest);
+        assertEquals(1, customerRepository.count());
 
 
 
     }
+
+    @Test
+    public void testThatICanFindRiderByCurrentLocation() {
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
 
 }

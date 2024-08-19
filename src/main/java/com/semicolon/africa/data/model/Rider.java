@@ -16,7 +16,7 @@ public class Rider {
 
     @Id
     private String riderId;
-    private String riderUserName;
+    private String riderUsername;
     private  String riderPassword;
     private String serviceCharge;
     private String vehicleDetails;
@@ -29,7 +29,6 @@ public class Rider {
     @DBRef
     private List<Product> productList;
     private List<Customer> customerList;
-    //private List<Pickup> pickupList;
-   // private List <Delivery> deliveryList;
+
 
 }

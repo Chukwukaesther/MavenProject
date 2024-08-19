@@ -6,10 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegisterRiderResponse {
-    private String RiderName;
-    private String RiderEmail;
-    private String RiderPhone;
-    private String RiderAddress;
+    private String riderName;
+    private String riderEmail;
+    private String riderPhone;
+    private String riderAddress;
     private String message;
 
 }

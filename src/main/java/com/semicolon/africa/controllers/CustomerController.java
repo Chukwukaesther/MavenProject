@@ -31,9 +31,6 @@ public class CustomerController {
         } catch (UserAlreadyExistException exception) {
             return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);
 
-        }catch (Exception exception) {
-            return new ResponseEntity<>(new ApiResponse(false, "An unexpected error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
     }
 

@@ -24,34 +24,32 @@ public class CustomerServiceImpl  implements CustomerService{
     @Override
     public RegisterCustomerResponse registerUser(RegisterCustomerRequest registerCustomerRequest) {
         Customer customer = new Customer();
-        String username = registerCustomerRequest.getUsername();
-        validateUser(username);
-        customer.setUserName(registerCustomerRequest.getUsername());
+        //String username = registerCustomerRequest.getUsername();
+
+        //validateUser(registerCustomerRequest.getUsername());
+        customer.setUsername(registerCustomerRequest.getUsername());
         customer.setAddress(registerCustomerRequest.getCustomerAddress());
-        customer.setPassword(registerCustomerRequest.getPassword());
         customer.setPassword(registerCustomerRequest.getPassword());
         customer.setPhoneNumber(registerCustomerRequest.getCustomerPhoneNumber());
         customer = customerRepository.save(customer);
         RegisterCustomerResponse registerCustomerResponse = new RegisterCustomerResponse();
         registerCustomerResponse.setMessage("Success");
-        registerCustomerResponse.setUserName(customer.getUserName());
+        registerCustomerResponse.setUsername(customer.getUsername());
         registerCustomerResponse.setId(customer.getId());
         return registerCustomerResponse;
     }
 
     private void validateUser(String username) {
-        if(customerRepository.existByUsername(username))throw new UserAlreadyExistException("User already exist");
-//        for (Customer user1 : customerRepository.findAll()){
-//            if (user1.getUserName().equals(username)) {
-//                throw new UserAlreadyExistException("User already exist");
-//            }
-//        }
+        if(customerRepository.existsByUsername(username))throw new UserAlreadyExistException("User already exist");
     }
+
+
+
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        Customer customer = customerRepository.findByUserName(loginRequest.getUserName());
-        if (!customer.getPassword().equals(loginRequest.getPassword()) && !customer.getUserName().equals(loginRequest.getUserName())) {
+        Customer customer = customerRepository.findByUsername(loginRequest.getUsername());
+        if (!customer.getPassword().equals(loginRequest.getPassword()) && !customer.getUsername().equals(loginRequest.getUsername())) {
             throw new UserAlreadyExistException("user not found");
         }
         LoginResponse loginResponse = new LoginResponse();
@@ -62,7 +60,7 @@ public class CustomerServiceImpl  implements CustomerService{
     private boolean ifExist(String username, String password) {
         List<Customer> customers = customerRepository.findAll();
         for (Customer customer : customers) {
-            if (customer.getUserName().equals(username) && customer.getPassword().equals(password)) {
+            if (customer.getUsername().equals(username) && customer.getPassword().equals(password)) {
                 return true;
             }
 
@@ -109,7 +107,7 @@ public class CustomerServiceImpl  implements CustomerService{
 
     @Override
     public PaymentDetailResponse payment(PaymentDetailsRequest paymentDetailsRequest) {
-        Customer customer = customerRepository.findByUserName(paymentDetailsRequest.getPaymentName());
+        Customer customer = customerRepository.findByUsername(paymentDetailsRequest.getPaymentName());
         customerRepository.save(customer);
         Rider rider1 = riderRepository.findByRiderUserName(String.valueOf(paymentDetailsRequest.getPaymentAmount()));
         rider1.setServiceCharge(paymentDetailsRequest.getPaymentStatus());
@@ -123,7 +121,7 @@ public class CustomerServiceImpl  implements CustomerService{
 
     @Override
     public FeedbackResponse feedback(FeedbackRequest feedbackRequest) {
-        Customer customer = customerRepository.findByUserName(feedbackRequest.getFeedback());
+        Customer customer = customerRepository.findByUsername(feedbackRequest.getFeedback());
         List<String> feedbacks = customer.getFeedBack();
         feedbacks.add(feedbackRequest.getFeedback());
         customer.setFeedBack(feedbacks);
@@ -135,7 +133,7 @@ public class CustomerServiceImpl  implements CustomerService{
 
     @Override
     public LogoutResponse logout(LogoutRequest logoutRequest) {
-        Customer customer = customerRepository.findByUserName(logoutRequest.getUserName());
+        Customer customer = customerRepository.findByUsername(logoutRequest.getUserName());
         String username = logoutRequest.getUserName();
         boolean isExisting = ifExisting(username);
         if (isExisting) {
@@ -149,7 +147,7 @@ public class CustomerServiceImpl  implements CustomerService{
 
     private boolean ifExisting(String username) {
         for (Customer customer :customerRepository.findAll()) {
-            if (customer.getUserName().equals(username)) {
+            if (customer.getUsername().equals(username)) {
                 return true;
             }
         }

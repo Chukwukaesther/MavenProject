@@ -47,8 +47,8 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        riderRepository.findByRiderUserName(loginRequest.getUserName());
-        String username = loginRequest.getUserName();
+        riderRepository.findByRiderUserName(loginRequest.getUsername());
+        String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
         boolean isExist = ifExist(username, password);

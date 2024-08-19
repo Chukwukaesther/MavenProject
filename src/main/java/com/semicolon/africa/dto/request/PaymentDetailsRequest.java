@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Getter
 public class PaymentDetailsRequest {
 
-    private String PaymentName;
-    private Double PaymentAmount;
-    private String PaymentType;
+    private String paymentName;
+    private Double paymentAmount;
+    private String paymentType;
     private String paymentStatus;
     private LocalDateTime paymentDate;
 }
